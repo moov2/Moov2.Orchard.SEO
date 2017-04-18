@@ -1,3 +1,7 @@
 ﻿<Placement>
-    <Place Parts_MetaInfo_Edit="Content:6"/>
+  <Place Parts_MetaInfo_Edit="Content:6"/>
+  
+  <Match DisplayType="Detail">
+    <Place Parts_MetaInfo="Content:1" />
+  </Match>
 </Placement>

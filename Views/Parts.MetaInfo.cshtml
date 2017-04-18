@@ -1,0 +1,10 @@
+﻿@using (Script.Head())
+{
+    if (!string.IsNullOrWhiteSpace(Model.Keywords)) {
+        <meta name="keywords" content="@Model.Keywords" />
+    }
+
+    if (!string.IsNullOrWhiteSpace(Model.Description)) {
+        <meta name="description" content="@Model.Description" />
+    }
+}
