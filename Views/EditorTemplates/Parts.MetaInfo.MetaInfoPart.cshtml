@@ -1,0 +1,14 @@
+﻿@model Moov2.Orchard.SEO.Models.MetaInfoPart
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.Description)">@T("Description")</label>
+    @Html.TextAreaFor(m => m.Description, new { @class = "text large" })
+    <span class="hint">@T("Summarise the content of the page in under 160 characters.")</span>
+</fieldset>
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.Keywords)">@T("Keywords")</label>
+    @Html.TextBoxFor(m => m.Keywords, new { @class = "text large" })
+    <span class="hint">@T("Comma separated list of words that describe the content on the page.")</span>
+</fieldset>
+
