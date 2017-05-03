@@ -21,5 +21,13 @@ namespace Moov2.Orchard.SEO
 
             return 1;
         }
+
+        public int UpdateFrom1()
+        {
+            SchemaBuilder.AlterTable("MetaInfoPartRecord",
+                table => table.AddColumn<string>("Title", column => column.WithLength(500).WithDefault("")));
+
+            return 2;
+        }
     }
 }

@@ -1,6 +1,12 @@
 ﻿@model Moov2.Orchard.SEO.Models.MetaInfoPart
 
 <fieldset>
+    <label for="@Html.FieldIdFor(m => m.Title)">@T("Title")</label>
+    @Html.TextBoxFor(m => m.Title, new { @class = "text large" })
+    <span class="hint">@T(string.Format("Define the title of the page, this will be shown in the browser's title bar or on the page's tab. The title will be prefixed with <strong>{0}{1}</strong>, which can be managed via the <a href=\"/Admin/Settings/Index\">site settings</a>.", WorkContext.CurrentSite.SiteName, WorkContext.CurrentSite.PageTitleSeparator))</span>
+</fieldset>
+
+<fieldset>
     <label for="@Html.FieldIdFor(m => m.Description)">@T("Description")</label>
     @Html.TextAreaFor(m => m.Description, new { @class = "text large" })
     <span class="hint">@T("Summarise the content of the page in under 160 characters.")</span>

@@ -13,5 +13,10 @@ namespace Moov2.Orchard.SEO.Models
             get { return Retrieve(x => x.Keywords); }
             set { Store(x => x.Keywords, value); }
         }
+
+        public string Title {
+            get { return Retrieve(x => x.Title); }
+            set { Store(x => x.Title, value); }
+        }
     }
 }
