@@ -79,6 +79,7 @@ namespace Moov2.Orchard.SEO.Drivers
 
             context.ImportAttribute(part.PartDefinition.Name, "Description", description => part.Description = description);
             context.ImportAttribute(part.PartDefinition.Name, "Keywords", keywords => part.Keywords = keywords);
+            context.ImportAttribute(part.PartDefinition.Name, "Title", title => part.Title = title);
         }
 
         #endregion
@@ -89,6 +90,7 @@ namespace Moov2.Orchard.SEO.Drivers
         {
             context.Element(part.PartDefinition.Name).SetAttributeValue("Description", part.Description);
             context.Element(part.PartDefinition.Name).SetAttributeValue("Keywords", part.Keywords);
+            context.Element(part.PartDefinition.Name).SetAttributeValue("Title", part.Title);
         }
 
         #endregion
