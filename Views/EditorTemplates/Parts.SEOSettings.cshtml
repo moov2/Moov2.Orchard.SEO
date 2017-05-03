@@ -1,0 +1,12 @@
+﻿@model Moov2.Orchard.SEO.Models.SEOSettingsPart
+
+<fieldset>
+    <legend>@T("SEO Settings")</legend>
+
+    <div>
+        @Html.EditorFor(m => m.RedirectToNonWWW)
+        <label for="@Html.FieldIdFor(m => m.RedirectToNonWWW)" class="forcheckbox">@T("Redirect to non WWW")</label>
+        @Html.ValidationMessage("RedirectToNonWWW", "*")
+        <span class="hint">@T("Visitors making a request to the site using \"www\" will be redirected with a 301 response to the same URL without www.")</span>
+    </div>
+</fieldset>

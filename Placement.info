@@ -4,4 +4,6 @@
   <Match DisplayType="Detail">
     <Place Parts_MetaInfo="Content:1" />
   </Match>
+
+  <Place Parts_SEOSettings_Edit="Content:2"/>
 </Placement>
