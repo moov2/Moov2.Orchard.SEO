@@ -34,7 +34,10 @@ namespace Moov2.Orchard.SEO.Filters
                 return;
 
             var request = filterContext.HttpContext.Request;
-            var consistentRequest = ValidateWWW(settings, request.Url);
+            var consistentRequest = new Uri(request.Url.ToString());
+
+            consistentRequest = ValidateWWW(settings, consistentRequest);
+            //consistentRequest = ValidateSSL(settings, consistentRequest);
 
             if (!consistentRequest.ToString().Equals(request.Url.ToString())) {
                 filterContext.Result = new RedirectResult(consistentRequest.ToString());
@@ -43,6 +46,17 @@ namespace Moov2.Orchard.SEO.Filters
         }
 
         #region Helpers
+
+        private Uri ValidateSSL(SEOSettingsPart settings, Uri url)
+        {
+            if (!settings.ForceSSL)
+                return url;
+
+            if (url.ToString().StartsWith("http://"))
+                return new Uri(url.ToString().Replace("http://", "https://"));
+
+            return url;
+        }
 
         private Uri ValidateWWW(SEOSettingsPart settings, Uri url)
         {

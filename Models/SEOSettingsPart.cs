@@ -8,6 +8,14 @@ namespace Moov2.Orchard.SEO.Models
     {
         public const string CacheKey = "SEOSettingsPart";
 
+        public bool ForceSSL {
+            get {
+                var attributeValue = this.As<InfosetPart>().Get<SEOSettingsPart>("ForceSSL");
+                return !string.IsNullOrWhiteSpace(attributeValue) && Convert.ToBoolean(attributeValue);
+            }
+            set { this.As<InfosetPart>().Set<SEOSettingsPart>("ForceSSL", value.ToString()); }
+        }
+
         public bool RedirectToNonWWW {
             get {
                 var attributeValue = this.As<InfosetPart>().Get<SEOSettingsPart>("RedirectToNonWWW");

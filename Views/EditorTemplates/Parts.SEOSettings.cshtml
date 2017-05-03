@@ -9,4 +9,11 @@
         @Html.ValidationMessage("RedirectToNonWWW", "*")
         <span class="hint">@T("Visitors making a request to the site using \"www\" will be redirected with a 301 response to the same URL without www.")</span>
     </div>
+
+    <div>
+        @Html.EditorFor(m => m.ForceSSL)
+        <label for="@Html.FieldIdFor(m => m.ForceSSL)" class="forcheckbox">@T("Force SSL")</label>
+        @Html.ValidationMessage("ForceSSL", "*")
+        <span class="hint">@T("Force visitors to use SSL (https). This is a basic implementation that will change the URL from http to https, for greater control use the <a href=\"/Admin/Modules/Features\">Secure Sockets Layer</a> module.")</span>
+    </div>
 </fieldset>
