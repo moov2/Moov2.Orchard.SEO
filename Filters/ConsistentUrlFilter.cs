@@ -37,7 +37,7 @@ namespace Moov2.Orchard.SEO.Filters
             var consistentRequest = new Uri(request.Url.ToString());
 
             consistentRequest = ValidateWWW(settings, consistentRequest);
-            //consistentRequest = ValidateSSL(settings, consistentRequest);
+            consistentRequest = ValidateSSL(settings, consistentRequest);
 
             if (!consistentRequest.ToString().Equals(request.Url.ToString())) {
                 filterContext.Result = new RedirectResult(consistentRequest.ToString());
