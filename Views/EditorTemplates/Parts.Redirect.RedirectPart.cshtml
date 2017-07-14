@@ -1,0 +1,7 @@
+﻿@model Moov2.Orchard.SEO.Models.RedirectPart
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.RedirectTo)">@T("Redirect To")</label>
+    @Html.TextBoxFor(m => m.RedirectTo, new { @class = "text large" })
+    <span class="hint">@T(string.Format("URL user should be redirected to. If you specify a relative URL, then the base URL from the <a href=\"/Admin/Settings/Index\">site settings</a> will be used."))</span>
+</fieldset>

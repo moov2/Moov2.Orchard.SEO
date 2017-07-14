@@ -33,6 +33,7 @@ namespace Moov2.Orchard.SEO.Filters
             if (filterContext.IsChildAction)
                 return;
 
+
             var request = filterContext.HttpContext.Request;
             var consistentRequest = new Uri(request.Url.ToString());
 

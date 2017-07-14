@@ -9,3 +9,9 @@ Category: Content
 Features:
     Moov2.Orchard.SEO:
         Description: Useful features to improve SEO
+		Category: Content
+	Moov2.Orchard.SEO.Redirects:
+        Name: Redirects
+        Description: Create 301 redirects for specific URLs
+        Category: Content
+		Dependencies: Orchard.Autoroute

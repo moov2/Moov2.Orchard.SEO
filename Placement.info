@@ -6,4 +6,6 @@
   </Match>
 
   <Place Parts_SEOSettings_Edit="Content:2"/>
+
+  <Place Parts_Redirect_Edit="Content:3"/>
 </Placement>
