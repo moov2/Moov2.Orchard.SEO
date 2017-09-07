@@ -16,4 +16,10 @@
         @Html.ValidationMessage("ForceSSL", "*")
         <span class="hint">@T("Force visitors to use SSL (https). This is a basic implementation that will change the URL from http to https, for greater control use the <a href=\"/Admin/Modules/Features\">Secure Sockets Layer</a> module.")</span>
     </div>
+
+    <div>
+        @Html.TextAreaFor(m => m.Robots)
+        <label for="@Html.FieldIdFor(m => m.Robots)">@T("Robots.txt")</label>
+        <span class="hint">@T("Define a robots.txt above, allowing web crawlers to know how to index your site.")</span>
+    </div>
 </fieldset>
