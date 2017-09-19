@@ -18,8 +18,8 @@
     </div>
 
     <div>
-        @Html.TextAreaFor(m => m.Robots)
         <label for="@Html.FieldIdFor(m => m.Robots)">@T("Robots.txt")</label>
-        <span class="hint">@T("Define a robots.txt above, allowing web crawlers to know how to index your site.")</span>
+        @Html.TextAreaFor(m => m.Robots)
+        <span class="hint">@T("Define a robots.txt above, allowing web crawlers to know how to index your site. Find <a href=\"http://www.robotstxt.org/\">more information</a> on robots.txt.")</span>
     </div>
 </fieldset>
