@@ -1,11 +1,12 @@
 ﻿using Moov2.Orchard.SEO.Models;
 using Orchard;
 using Orchard.ContentManagement;
-using System.Text;
+using Orchard.Environment.Extensions;
 using System.Web.Mvc;
 
 namespace Moov2.Orchard.SEO.Controllers
 {
+    [OrchardFeature("Moov2.Orchard.SEO.Robots")]
     public class RobotsController : Controller
     {
         #region Constants

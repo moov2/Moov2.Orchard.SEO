@@ -1,4 +1,11 @@
-﻿@model Moov2.Orchard.SEO.Models.SEOSettingsPart
+﻿@using Orchard.ContentManagement
+@using Orchard.Environment.Descriptor.Models
+
+@model Moov2.Orchard.SEO.Models.SEOSettingsPart
+
+@{
+    var isRobotsEnabled = WorkContext.Resolve<ShellDescriptor>().Features.Any(x => x.Name == "Moov2.Orchard.SEO.Robots");
+}
 
 <fieldset>
     <legend>@T("SEO Settings")</legend>
@@ -17,9 +24,12 @@
         <span class="hint">@T("Force visitors to use SSL (https). This is a basic implementation that will change the URL from http to https, for greater control use the <a href=\"/Admin/Modules/Features\">Secure Sockets Layer</a> module.")</span>
     </div>
 
+    @if (isRobotsEnabled)
+    {
     <div>
         <label for="@Html.FieldIdFor(m => m.Robots)">@T("Robots.txt")</label>
         @Html.TextAreaFor(m => m.Robots)
         <span class="hint">@T("Define a robots.txt above, allowing web crawlers to know how to index your site. Find <a href=\"http://www.robotstxt.org/\">more information</a> on robots.txt.")</span>
     </div>
+    }
 </fieldset>

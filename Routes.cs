@@ -1,9 +1,11 @@
-﻿using Orchard.Mvc.Routes;
+﻿using Orchard.Environment.Extensions;
+using Orchard.Mvc.Routes;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using System.Web.Routing;
 namespace Moov2.Orchard.SEO
 {
+    [OrchardFeature("Moov2.Orchard.SEO.Robots")]
     public class Routes : IRouteProvider
     {
         public void GetRoutes(ICollection<RouteDescriptor> routes)
