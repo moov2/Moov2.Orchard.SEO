@@ -1,12 +1,23 @@
 ﻿using Moov2.Orchard.SEO.Models;
 using Orchard;
 using Orchard.ContentManagement;
+using System.Text;
 using System.Web.Mvc;
 
 namespace Moov2.Orchard.SEO.Controllers
 {
     public class RobotsController : Controller
     {
+        #region Constants
+
+        /// <summary>
+        /// Default robots.txt disable robots from crawling the site.
+        /// </summary>
+        private const string DefaultRobotsTxt = "User-agent: *\nDisallow: /";
+        private const string ContentType = "text/plain";
+
+        #endregion
+
         #region Dependencies
         private readonly IOrchardServices _services;
         #endregion
@@ -20,9 +31,13 @@ namespace Moov2.Orchard.SEO.Controllers
 
         #endregion
 
-        public string GetRobots()
+        #region Actions
+
+        public ActionResult GetRobots()
         {
-            return !string.IsNullOrEmpty(_services.WorkContext.CurrentSite.As<SEOSettingsPart>().Robots) ? _services.WorkContext.CurrentSite.As<SEOSettingsPart>().Robots : "";
+            return Content(!string.IsNullOrEmpty(_services.WorkContext.CurrentSite.As<SEOSettingsPart>().Robots) ? _services.WorkContext.CurrentSite.As<SEOSettingsPart>().Robots : DefaultRobotsTxt, ContentType);
         }
+
+        #endregion
     }
 }
