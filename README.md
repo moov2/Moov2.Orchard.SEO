@@ -25,3 +25,9 @@ It's good practice for visitors to always see a consistent structure for page UR
 ### 301 Redirects
 
 Site content changes can cause pages to be moved/replaced; it's good practice to ensure visitors to old URLs are redirected (commonly a 301 redirect) to a replacement page instead of shown a 404. This feature makes a new content type (`Redirect`) available, which handles performing a 301 redirect from a specified URL to another URL.
+
+### Robots
+
+Customise the contents of `/robots.txt` in order to control behaviour of robots that crawl your site. To learn more about robots.txt head over to the [http://www.robotstxt.org/](http://www.robotstxt.org/). 
+
+When this module is enabled, you'll be able to control the contents returned when a visitor requests `/robots.txt`. There is a "Robots" field within the SEO settings available in the admin dashboard. By default, when enabled, the `/robots.txt` will instruct robots to not crawl the site.
