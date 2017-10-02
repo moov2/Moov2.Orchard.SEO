@@ -42,10 +42,10 @@ namespace Moov2.Orchard.SEO.Drivers
 
         protected override DriverResult Display(MetaInfoPart part, string displayType, dynamic shapeHelper)
         {
-            var pageTitle = string.IsNullOrEmpty(part.Title) ? WorkContext.CurrentSite.SiteName : string.Format("{0}{1}{2}", WorkContext.CurrentSite.SiteName, WorkContext.CurrentSite.PageTitleSeparator, part.Title);
+            var pageTitle = string.IsNullOrEmpty(part.Title) ? WorkContext.CurrentSite.SiteName : part.Title;
 
             return Combined(
-                ContentShape("Parts_MetaInfo", () => shapeHelper.Parts_MetaInfo(Description: part.Description, Keywords: part.Keywords, Title: pageTitle))
+                ContentShape("Parts_MetaInfo", () => shapeHelper.Parts_MetaInfo(Description: part.Description, Keywords: part.Keywords, Title: pageTitle, HasPageTitle: (string.IsNullOrEmpty(part.Title) ? false : true) ))
             );
         }
 

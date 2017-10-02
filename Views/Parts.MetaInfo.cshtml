@@ -1,14 +1,14 @@
 ﻿@using (Script.Head())
 {
+    if (Model.HasPageTitle) {
+        Layout.Title = Model.Title;
+    }
+
     if (!string.IsNullOrWhiteSpace(Model.Keywords)) {
         <meta name="keywords" content="@Model.Keywords" />
     }
 
     if (!string.IsNullOrWhiteSpace(Model.Description)) {
         <meta name="description" content="@Model.Description" />
-    }
-
-    if (!string.IsNullOrWhiteSpace(Model.Title)) {
-        <title>@Model.Title</title>
     }
 }
