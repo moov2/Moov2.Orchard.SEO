@@ -29,5 +29,10 @@ namespace Moov2.Orchard.SEO.Models
             get { return  this.As<InfosetPart>().Get<SEOSettingsPart>("Robots"); }
             set { this.As<InfosetPart>().Set<SEOSettingsPart>("Robots", value.ToString()); }
         }
+
+        public string TwitterUsername {
+            get { return this.As<InfosetPart>().Get<SEOSettingsPart>("TwitterUsername"); }
+            set { this.As<InfosetPart>().Set<SEOSettingsPart>("TwitterUsername", value.ToString()); }
+        }
     }
 }

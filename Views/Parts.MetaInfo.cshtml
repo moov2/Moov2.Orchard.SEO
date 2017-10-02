@@ -1,5 +1,6 @@
 ﻿@using (Script.Head())
 {
+    // General Meta info
     if (Model.HasPageTitle) {
         Layout.Title = Model.Title;
     }
@@ -10,5 +11,27 @@
 
     if (!string.IsNullOrWhiteSpace(Model.Description)) {
         <meta name="description" content="@Model.Description" />
+    }
+
+    // Twitter
+    if (!string.IsNullOrWhiteSpace(Model.Description) && Model.HasPageTitle && Model.SeoSettings != null && !string.IsNullOrWhiteSpace(Model.SeoSettings.TwitterUsername)) {
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:description" content="@Model.Description" />
+        <meta name="twitter:title" content="@Model.PageTitleWithSiteName" />
+        <meta name="twitter:site" content="@("@")@Model.SeoSettings.TwitterUsername" />
+        <meta name="twitter:image" content="" />
+        <meta name="twitter:creator" content="@("@")@Model.SeoSettings.TwitterUsername" />
+    }
+
+
+    // Facebook
+    if (!string.IsNullOrWhiteSpace(Model.Description) && Model.HasPageTitle && !string.IsNullOrWhiteSpace(WorkContext.CurrentSite.SiteName)) {
+        <meta property="og:locale" content="en_GB" />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content="@Model.PageTitleWithSiteName" />
+        <meta property="og:description" content="@Model.Description" />
+        <meta property="og:url" content="@Model.PageUrl" />
+        <meta property="og:site_name" content="@WorkContext.CurrentSite.SiteName" />
+        <meta property="og:image" content="" />
     }
 }

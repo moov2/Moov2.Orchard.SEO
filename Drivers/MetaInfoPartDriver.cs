@@ -1,9 +1,12 @@
 ﻿using Moov2.Orchard.SEO.Models;
+using Moov2.Orchard.SEO.Services;
 using Orchard;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Drivers;
 using Orchard.ContentManagement.Handlers;
 using Orchard.Localization;
+using Orchard.Mvc.Html;
+using System.Web;
 
 namespace Moov2.Orchard.SEO.Drivers
 {
@@ -12,6 +15,7 @@ namespace Moov2.Orchard.SEO.Drivers
         #region Constants
 
         private const string TemplateName = "Parts.MetaInfo.MetaInfoPart";
+        private readonly ISEOSettingsProvider _seoSettingsProvider;
 
         #endregion
 
@@ -25,9 +29,10 @@ namespace Moov2.Orchard.SEO.Drivers
 
         #region Constructor
 
-        public MetaInfoPartDriver(IWorkContextAccessor workContextAccessor)
+        public MetaInfoPartDriver(IWorkContextAccessor workContextAccessor, ISEOSettingsProvider seoSettingsProvider)
         {
             WorkContext = workContextAccessor.GetContext();
+            _seoSettingsProvider = seoSettingsProvider;
         }
 
         #endregion
@@ -43,9 +48,13 @@ namespace Moov2.Orchard.SEO.Drivers
         protected override DriverResult Display(MetaInfoPart part, string displayType, dynamic shapeHelper)
         {
             var pageTitle = string.IsNullOrEmpty(part.Title) ? WorkContext.CurrentSite.SiteName : part.Title;
+            var pageTitleWithSiteName = string.IsNullOrEmpty(part.Title) ? WorkContext.CurrentSite.SiteName : string.Format("{0}{1}{2}", WorkContext.CurrentSite.SiteName, WorkContext.CurrentSite.PageTitleSeparator, part.Title);
+
+            var pageUrlHelper = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
+            var pageUrl = string.Format("{0}{1}", WorkContext.CurrentSite.BaseUrl, pageUrlHelper.ItemDisplayUrl((ContentItem)part.ContentItem));
 
             return Combined(
-                ContentShape("Parts_MetaInfo", () => shapeHelper.Parts_MetaInfo(Description: part.Description, Keywords: part.Keywords, Title: pageTitle, HasPageTitle: (string.IsNullOrEmpty(part.Title) ? false : true) ))
+                ContentShape("Parts_MetaInfo", () => shapeHelper.Parts_MetaInfo(Description: part.Description, Keywords: part.Keywords, Title: pageTitle, PageTitleWithSiteName: pageTitleWithSiteName, HasPageTitle: (string.IsNullOrEmpty(part.Title) ? false : true), SeoSettings: _seoSettingsProvider.GetSettings(), PageUrl: pageUrl))
             );
         }
 

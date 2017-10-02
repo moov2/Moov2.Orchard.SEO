@@ -24,6 +24,13 @@
         <span class="hint">@T("Force visitors to use SSL (https). This is a basic implementation that will change the URL from http to https, for greater control use the <a href=\"/Admin/Modules/Features\">Secure Sockets Layer</a> module.")</span>
     </div>
 
+    <div>
+        <label for="@Html.FieldIdFor(m => m.TwitterUsername)">@T("Twitter Username")</label>
+        @Html.EditorFor(m => m.TwitterUsername)
+        @Html.ValidationMessage("TwitterUsername", "*")
+        <span class="hint">@T("Twitter Username, this would be used for twitter social sharing.")</span>
+    </div>
+
     @if (isRobotsEnabled)
     {
     <div>
