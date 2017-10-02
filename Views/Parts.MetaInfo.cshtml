@@ -26,7 +26,7 @@
 
     // Facebook
     if (!string.IsNullOrWhiteSpace(Model.Description) && Model.HasPageTitle && !string.IsNullOrWhiteSpace(WorkContext.CurrentSite.SiteName)) {
-        <meta property="og:locale" content="en_GB" />
+        <meta property="og:locale" content="@Model.CurrentCulture" />
         <meta property="og:type" content="article" />
         <meta property="og:title" content="@Model.PageTitleWithSiteName" />
         <meta property="og:description" content="@Model.Description" />

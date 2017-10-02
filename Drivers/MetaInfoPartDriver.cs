@@ -53,8 +53,10 @@ namespace Moov2.Orchard.SEO.Drivers
             var pageUrlHelper = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
             var pageUrl = string.Format("{0}{1}", WorkContext.CurrentSite.BaseUrl, pageUrlHelper.ItemDisplayUrl((ContentItem)part.ContentItem));
 
+            var currentCulture = WorkContext.CurrentCulture.Replace("-", "_");
+
             return Combined(
-                ContentShape("Parts_MetaInfo", () => shapeHelper.Parts_MetaInfo(Description: part.Description, Keywords: part.Keywords, Title: pageTitle, PageTitleWithSiteName: pageTitleWithSiteName, HasPageTitle: (string.IsNullOrEmpty(part.Title) ? false : true), SeoSettings: _seoSettingsProvider.GetSettings(), PageUrl: pageUrl))
+                ContentShape("Parts_MetaInfo", () => shapeHelper.Parts_MetaInfo(Description: part.Description, Keywords: part.Keywords, Title: pageTitle, PageTitleWithSiteName: pageTitleWithSiteName, HasPageTitle: (string.IsNullOrEmpty(part.Title) ? false : true), SeoSettings: _seoSettingsProvider.GetSettings(), PageUrl: pageUrl, CurrentCulture: currentCulture))
             );
         }
 
