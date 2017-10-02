@@ -1,5 +1,9 @@
 ﻿@model Moov2.Orchard.SEO.Models.MetaInfoPart
 
+<hr />
+
+<h2>@T("Meta Info")</h2>
+
 <fieldset>
     <label for="@Html.FieldIdFor(m => m.Title)">@T("Title")</label>
     @Html.TextBoxFor(m => m.Title, new { @class = "text large" })
