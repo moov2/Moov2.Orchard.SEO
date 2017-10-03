@@ -24,10 +24,14 @@ namespace Moov2.Orchard.SEO.Models
             set { this.As<InfosetPart>().Set<SEOSettingsPart>("RedirectToNonWWW", value.ToString()); }
         }
 
-        public string Robots
-        {
+        public string Robots {
             get { return  this.As<InfosetPart>().Get<SEOSettingsPart>("Robots"); }
-            set { this.As<InfosetPart>().Set<SEOSettingsPart>("Robots", value.ToString()); }
+            set { this.As<InfosetPart>().Set<SEOSettingsPart>("Robots", (value == null ? "" : value.ToString())); }
+        }
+
+        public string Favicon {
+            get { return this.As<InfosetPart>().Get<SEOSettingsPart>("Favicon"); }
+            set { this.As<InfosetPart>().Set<SEOSettingsPart>("Favicon", (value == null ? "" : value.ToString())); }
         }
 
         public string TwitterUsername {

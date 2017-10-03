@@ -34,6 +34,21 @@ namespace Moov2.Orchard.SEO
                         },
                         new MvcRouteHandler())
                 },
+                new RouteDescriptor {
+                    Priority = 5,
+                    Route = new Route(
+                        "favicon.ico",
+                        new RouteValueDictionary {
+                            {"area", "Moov2.Orchard.SEO"},
+                            {"controller", "Favicon"},
+                            {"action", "GetFavicon"}
+                        },
+                        new RouteValueDictionary(),
+                        new RouteValueDictionary {
+                            {"area", "Moov2.Orchard.SEO"}
+                        },
+                        new MvcRouteHandler())
+                },
             };
         }
     }

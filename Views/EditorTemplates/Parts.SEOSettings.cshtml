@@ -5,6 +5,7 @@
 
 @{
     var isRobotsEnabled = WorkContext.Resolve<ShellDescriptor>().Features.Any(x => x.Name == "Moov2.Orchard.SEO.Robots");
+    var isFaviconEnabled = WorkContext.Resolve<ShellDescriptor>().Features.Any(x => x.Name == "Moov2.Orchard.SEO.Favicon");
 }
 
 <fieldset>
@@ -50,5 +51,13 @@
         @Html.TextAreaFor(m => m.Robots)
         <span class="hint">@T("Define a robots.txt above, allowing web crawlers to know how to index your site. Find <a href=\"http://www.robotstxt.org/\">more information</a> on robots.txt.")</span>
     </div>
+    }
+
+    @if (isFaviconEnabled) {
+        <div>
+            <label for="@Html.FieldIdFor(m => m.Favicon)">@T("Favicon")</label>
+            @Html.TextBoxFor(m => m.Favicon, new { @class = "text large" })
+            <span class="hint">@T("Define a favicon for this website.")</span>
+        </div>
     }
 </fieldset>

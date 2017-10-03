@@ -56,6 +56,7 @@
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -72,6 +73,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\FaviconController.cs" />
     <Compile Include="Controllers\RobotsController.cs" />
     <Compile Include="Drivers\MetaInfoPartDriver.cs" />
     <Compile Include="Drivers\RedirectPartDriver.cs" />

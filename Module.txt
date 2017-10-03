@@ -19,3 +19,7 @@ Features:
 		Name: Robots.txt
         Description: Customise content of /robots.txt.
         Category: Content
+	Moov2.Orchard.SEO.Favicon:
+		Name: Favicon
+        Description: Customise favicon.
+        Category: Content
