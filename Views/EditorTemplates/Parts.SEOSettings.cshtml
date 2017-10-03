@@ -24,11 +24,23 @@
         <span class="hint">@T("Force visitors to use SSL (https). This is a basic implementation that will change the URL from http to https, for greater control use the <a href=\"/Admin/Modules/Features\">Secure Sockets Layer</a> module.")</span>
     </div>
 
+    <h2>Meta Tags</h2>
+
     <div>
         <label for="@Html.FieldIdFor(m => m.TwitterUsername)">@T("Twitter Username")</label>
         @Html.EditorFor(m => m.TwitterUsername)
-        @Html.ValidationMessage("TwitterUsername", "*")
-        <span class="hint">@T("Twitter Username, this would be used for twitter social sharing.")</span>
+        <span class="hint">@T("This will be used for the Twitter social sharing meta tags (twitter:site, twitter:creator).")</span>
+    </div>
+
+    <div>
+        <label for="@Html.FieldIdFor(m => m.DefaultDescription)">@T("DefaultDescription")</label>
+        @Html.EditorFor(m => m.DefaultDescription)
+        <span class="hint">@T("This is the default description in meta tags, this also can be overridden from within each page.")</span>
+    </div>
+    <div>
+        <label for="@Html.FieldIdFor(m => m.DefaultKeywords)">@T("DefaultKeywords")</label>
+        @Html.EditorFor(m => m.DefaultKeywords)
+        <span class="hint">@T("This is the default keywords in meta tags, this also can be overridden from within each page.")</span>
     </div>
 
     @if (isRobotsEnabled)

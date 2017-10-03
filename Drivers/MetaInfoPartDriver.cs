@@ -55,8 +55,21 @@ namespace Moov2.Orchard.SEO.Drivers
 
             var currentCulture = WorkContext.CurrentCulture.Replace("-", "_");
 
+            var seoSettings = _seoSettingsProvider.GetSettings();
+
+            var twitterUsername = (seoSettings.TwitterUsername.StartsWith("@") ? seoSettings.TwitterUsername : string.Format("@{0}", seoSettings.TwitterUsername));
+
             return Combined(
-                ContentShape("Parts_MetaInfo", () => shapeHelper.Parts_MetaInfo(Description: part.Description, Keywords: part.Keywords, Title: pageTitle, PageTitleWithSiteName: pageTitleWithSiteName, HasPageTitle: (string.IsNullOrEmpty(part.Title) ? false : true), SeoSettings: _seoSettingsProvider.GetSettings(), PageUrl: pageUrl, CurrentCulture: currentCulture))
+                ContentShape("Parts_MetaInfo", () => 
+                shapeHelper.Parts_MetaInfo(
+                    Description: (string.IsNullOrWhiteSpace(part.Description) ? seoSettings.DefaultDescription : part.Description), 
+                    Keywords: (string.IsNullOrWhiteSpace(part.Keywords) ? seoSettings.DefaultKeywords: part.Keywords), 
+                    Title: pageTitle, 
+                    PageTitleWithSiteName: pageTitleWithSiteName, 
+                    HasPageTitle: (string.IsNullOrEmpty(part.Title) ? false : true),
+                    TwitterUsername: twitterUsername, 
+                    PageUrl: pageUrl, 
+                    CurrentCulture: currentCulture))
             );
         }
 
