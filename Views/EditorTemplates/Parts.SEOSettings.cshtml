@@ -34,12 +34,12 @@
 
     <div>
         <label for="@Html.FieldIdFor(m => m.DefaultDescription)">@T("DefaultDescription")</label>
-        @Html.EditorFor(m => m.DefaultDescription)
+        @Html.TextAreaFor(m => m.DefaultDescription)
         <span class="hint">@T("This is the default description in meta tags, this also can be overridden from within each page.")</span>
     </div>
     <div>
         <label for="@Html.FieldIdFor(m => m.DefaultKeywords)">@T("DefaultKeywords")</label>
-        @Html.EditorFor(m => m.DefaultKeywords)
+        @Html.TextBoxFor(m => m.DefaultKeywords, new { @class = "text large" })
         <span class="hint">@T("This is the default keywords in meta tags, this also can be overridden from within each page.")</span>
     </div>
 
