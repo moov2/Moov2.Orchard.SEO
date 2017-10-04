@@ -1,1 +1,8 @@
-[]
+[
+  {
+    "inputs": [
+      "Assets/JavaScript/favicon.editor.js"
+    ],
+    "output": "Scripts/favicon.editor.js"
+  }
+]

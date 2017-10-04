@@ -90,12 +90,16 @@
     <Compile Include="Models\SEOSettingsPart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedirectMigrations.cs" />
+    <Compile Include="ResourceManifest.cs" />
     <Compile Include="Routes.cs" />
     <Compile Include="Services\ISEOSettingsProvider.cs" />
     <Compile Include="Services\SEOSettingsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets.json" />
+    <Content Include="Assets\JavaScript\favicon.editor.js" />
+    <Content Include="Scripts\favicon.editor.js" />
+    <Content Include="Scripts\favicon.editor.min.js" />
     <Content Include="Web.config" />
     <Content Include="Module.txt" />
   </ItemGroup>
@@ -130,7 +134,11 @@
   <ItemGroup>
     <Content Include="Views\EditorTemplates\Parts.Redirect.RedirectPart.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Scripts\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

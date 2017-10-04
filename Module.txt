@@ -22,4 +22,5 @@ Features:
 	Moov2.Orchard.SEO.Favicon:
 		Name: Favicon
         Description: Customise favicon.
-        Category: Content
+        Category: Media
+		Dependencies: Orchard.MediaLibrary

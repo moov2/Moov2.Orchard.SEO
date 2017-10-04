@@ -13,13 +13,9 @@ namespace Moov2.Orchard.SEO.Controllers {
     [OrchardFeature("Moov2.Orchard.SEO.Favicon")]
     public class FaviconController : Controller
     {
-        #region Constants
-
-        #endregion
-
         #region Dependencies
         private readonly IOrchardServices _services;
-        private IWorkContextAccessor _workContextAccessor;
+        private readonly IWorkContextAccessor _workContextAccessor;
         #endregion
 
         #region Constructor
