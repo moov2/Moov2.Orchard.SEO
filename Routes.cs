@@ -6,7 +6,7 @@ using System.Web.Routing;
 namespace Moov2.Orchard.SEO
 {
     [OrchardFeature("Moov2.Orchard.SEO.Robots")]
-    public class Routes : IRouteProvider
+    public class RoutesRobots : IRouteProvider
     {
         public void GetRoutes(ICollection<RouteDescriptor> routes)
         {
@@ -33,7 +33,25 @@ namespace Moov2.Orchard.SEO
                             {"area", "Moov2.Orchard.SEO"}
                         },
                         new MvcRouteHandler())
-                },
+                }
+            };
+        }
+    }
+
+    [OrchardFeature("Moov2.Orchard.SEO.Favicon")]
+    public class RoutesFavicon : IRouteProvider
+    {
+        public void GetRoutes(ICollection<RouteDescriptor> routes)
+        {
+            foreach (RouteDescriptor routeDescriptor in GetRoutes())
+            {
+                routes.Add(routeDescriptor);
+            }
+        }
+
+        public IEnumerable<RouteDescriptor> GetRoutes()
+        {
+            return new[] {
                 new RouteDescriptor {
                     Priority = 5,
                     Route = new Route(
@@ -48,7 +66,7 @@ namespace Moov2.Orchard.SEO
                             {"area", "Moov2.Orchard.SEO"}
                         },
                         new MvcRouteHandler())
-                },
+                }
             };
         }
     }
