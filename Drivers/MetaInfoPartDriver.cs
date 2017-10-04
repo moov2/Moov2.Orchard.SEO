@@ -67,7 +67,9 @@ namespace Moov2.Orchard.SEO.Drivers
                     Title: pageTitle, 
                     PageTitleWithSiteName: pageTitleWithSiteName, 
                     HasPageTitle: (string.IsNullOrEmpty(part.Title) ? false : true),
-                    TwitterUsername: twitterUsername, 
+                    TwitterUsername: twitterUsername,
+                    GoogleAnalytics: seoSettings.GoogleAnalytics,
+                    GoogleTagManager: seoSettings.GoogleTagManager,
                     PageUrl: pageUrl, 
                     CurrentCulture: currentCulture))
             );

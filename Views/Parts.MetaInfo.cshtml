@@ -1,5 +1,31 @@
-﻿@using (Script.Head())
-{
+﻿@using (Script.Head()) {
+    // Google Analytics
+    if (!string.IsNullOrWhiteSpace(Model.GoogleAnalytics)) {
+        <script async src="https://www.googletagmanager.com/gtag/js?id=@Model.GoogleAnalytics"></script>
+        <script>
+            //<![CDATA[
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments) };
+            gtag('js', new Date());
+
+            gtag('config', '@Model.GoogleAnalytics');
+            //]]>
+        </script>
+    }
+
+    // Google Tag Manager
+    if (!string.IsNullOrWhiteSpace(Model.GoogleTagManager)) {
+        <script>
+            //<![CDATA[
+            (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+            })(window,document,'script','dataLayer','@Model.GoogleTagManager');
+            //]]>
+        </script>
+    }
+
     // General Meta info
     if (Model.HasPageTitle) {
         Layout.Title = Model.Title;
@@ -32,5 +58,13 @@
         <meta property="og:url" content="@Model.PageUrl" />
         <meta property="og:site_name" content="@WorkContext.CurrentSite.SiteName" />
         <meta property="og:image" content="" />
+    }
+}
+
+@{
+    // Google Tag Manager
+    if (!string.IsNullOrWhiteSpace(Model.GoogleTagManager)) {
+        var bodyGoogleTagManager = string.Format("<noscript><iframe src=\"https://www.googletagmanager.com/ns.html?id={0}\" height=\"0\" width=\"0\" style=\"display:none;visibility:hidden\"></iframe></noscript>", @Model.GoogleTagManager);
+        WorkContext.Layout.Body.Items.Insert(0, Html.Raw(bodyGoogleTagManager));
     }
 }

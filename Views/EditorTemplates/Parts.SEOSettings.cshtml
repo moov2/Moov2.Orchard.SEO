@@ -69,4 +69,17 @@
             <span class="hint">@T("Define a favicon for this website.")</span>
         </div>
     }
+
+    <hr />
+    <h2>Analytics and Tag Manager</h2>
+    <div>
+        <label for="@Html.FieldIdFor(m => m.GoogleAnalytics)">@T("Google Analytics")</label>
+        @Html.TextBoxFor(m => m.GoogleAnalytics)
+        <span class="hint">@T("Enter the Google Analytics ID here to track analytics. e.g. UA-XXXXX-X")</span>
+    </div>
+    <div>
+        <label for="@Html.FieldIdFor(m => m.GoogleTagManager)">@T("Google Analytics")</label>
+        @Html.TextBoxFor(m => m.GoogleTagManager)
+        <span class="hint">@T("Enter the Google Tag Manager ID here to manage the tags via <a href=\"https://www.google.com/analytics/tag-manager/\">Google Tag Manager</a>. e.g. GMT-XXXXXXX")</span>
+    </div>
 </fieldset>

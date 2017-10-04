@@ -48,5 +48,15 @@ namespace Moov2.Orchard.SEO.Models
             get { return this.As<InfosetPart>().Get<SEOSettingsPart>("DefaultKeywords"); }
             set { this.As<InfosetPart>().Set<SEOSettingsPart>("DefaultKeywords", (value == null ? "" : value.ToString())); }
         }
+
+        public string GoogleAnalytics {
+            get { return this.As<InfosetPart>().Get<SEOSettingsPart>("GoogleAnalytics"); }
+            set { this.As<InfosetPart>().Set<SEOSettingsPart>("GoogleAnalytics", (value == null ? "" : value.ToString())); }
+        }
+
+        public string GoogleTagManager {
+            get { return this.As<InfosetPart>().Get<SEOSettingsPart>("GoogleTagManager"); }
+            set { this.As<InfosetPart>().Set<SEOSettingsPart>("GoogleTagManager", (value == null ? "" : value.ToString())); }
+        }
     }
 }
