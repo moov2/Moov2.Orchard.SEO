@@ -1,6 +1,16 @@
-﻿@using (Script.Head()) {
+﻿@using Orchard.ContentManagement
+@using Orchard.Environment.Descriptor.Models
+
+@{
+    var isGoogleAnalyticsEnabled = WorkContext.Resolve<ShellDescriptor>().Features.Any(x => x.Name == "Moov2.Orchard.SEO.GoogleAnalytics");
+}
+
+@using (Script.Head()) {
     // Google Analytics
-    if (!string.IsNullOrWhiteSpace(Model.GoogleAnalytics)) {
+    if (isGoogleAnalyticsEnabled)
+    {
+        if (!string.IsNullOrWhiteSpace(Model.GoogleAnalytics))
+        {
         <script async src="https://www.googletagmanager.com/gtag/js?id=@Model.GoogleAnalytics"></script>
         <script>
             //<![CDATA[
@@ -11,10 +21,11 @@
             gtag('config', '@Model.GoogleAnalytics');
             //]]>
         </script>
-    }
+        }
 
-    // Google Tag Manager
-    if (!string.IsNullOrWhiteSpace(Model.GoogleTagManager)) {
+        // Google Tag Manager
+        if (!string.IsNullOrWhiteSpace(Model.GoogleTagManager))
+        {
         <script>
             //<![CDATA[
             (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -24,6 +35,7 @@
             })(window,document,'script','dataLayer','@Model.GoogleTagManager');
             //]]>
         </script>
+        }
     }
 
     // General Meta info

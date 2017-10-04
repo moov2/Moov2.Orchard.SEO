@@ -6,6 +6,7 @@
 @{
     var isRobotsEnabled = WorkContext.Resolve<ShellDescriptor>().Features.Any(x => x.Name == "Moov2.Orchard.SEO.Robots");
     var isFaviconEnabled = WorkContext.Resolve<ShellDescriptor>().Features.Any(x => x.Name == "Moov2.Orchard.SEO.Favicon");
+    var isGoogleAnalyticsEnabled = WorkContext.Resolve<ShellDescriptor>().Features.Any(x => x.Name == "Moov2.Orchard.SEO.GoogleAnalytics");
 
     Script.Require("FaviconEditor");
     Style.Require("jQueryColorBox");
@@ -78,18 +79,21 @@
     <hr />
 }
 
-<h2>@T("Analytics and Tag Manager")</h2>
+@if (isGoogleAnalyticsEnabled)
+{
+    <h2>@T("Analytics and Tag Manager")</h2>
 
-<fieldset>
-    <label for="@Html.FieldIdFor(m => m.GoogleAnalytics)">@T("Google Analytics")</label>
-    @Html.TextBoxFor(m => m.GoogleAnalytics)
-    <span class="hint">@T("Enter the Google Analytics ID here to track analytics. e.g. UA-XXXXX-X")</span>
-</fieldset>
+    <fieldset>
+        <label for="@Html.FieldIdFor(m => m.GoogleAnalytics)">@T("Google Analytics")</label>
+        @Html.TextBoxFor(m => m.GoogleAnalytics)
+        <span class="hint">@T("Enter the Google Analytics ID here to track analytics. e.g. UA-XXXXX-X")</span>
+    </fieldset>
 
-<fieldset>
-    <label for="@Html.FieldIdFor(m => m.GoogleTagManager)">@T("Google Tag Manager")</label>
-    @Html.TextBoxFor(m => m.GoogleTagManager)
-    <span class="hint">@T("Enter the Google Tag Manager ID here to manage the tags via <a href=\"https://www.google.com/analytics/tag-manager/\">Google Tag Manager</a>. e.g. GMT-XXXXXXX")</span>
-</fieldset>
+    <fieldset>
+        <label for="@Html.FieldIdFor(m => m.GoogleTagManager)">@T("Google Tag Manager")</label>
+        @Html.TextBoxFor(m => m.GoogleTagManager)
+        <span class="hint">@T("Enter the Google Tag Manager ID here to manage the tags via <a href=\"https://www.google.com/analytics/tag-manager/\">Google Tag Manager</a>. e.g. GMT-XXXXXXX")</span>
+    </fieldset>
 
-<hr />
+    <hr />
+}

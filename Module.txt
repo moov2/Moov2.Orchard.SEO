@@ -16,11 +16,15 @@ Features:
         Category: Content
         Dependencies: Orchard.Autoroute
     Moov2.Orchard.SEO.Robots:
-		Name: Robots.txt
+        Name: Robots.txt
         Description: Customise content of /robots.txt.
         Category: Content
-	Moov2.Orchard.SEO.Favicon:
-		Name: Favicon
+    Moov2.Orchard.SEO.Favicon:
+        Name: Favicon
         Description: Customise favicon.
         Category: Media
-		Dependencies: Orchard.MediaLibrary
+        Dependencies: Orchard.MediaLibrary
+    Moov2.Orchard.SEO.GoogleAnalytics:
+        Name: Google Analytics
+        Description: Configure Google Analytics.
+        Category: Content
