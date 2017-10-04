@@ -26,5 +26,5 @@ Features:
         Dependencies: Orchard.MediaLibrary
     Moov2.Orchard.SEO.GoogleAnalytics:
         Name: Google Analytics
-        Description: Configure Google Analytics.
+        Description: Configure Google Analytics/Tag Manager.
         Category: Content

@@ -30,4 +30,16 @@ Site content changes can cause pages to be moved/replaced; it's good practice to
 
 Customise the contents of `/robots.txt` in order to control behaviour of robots that crawl your site. To learn more about robots.txt head over to the [http://www.robotstxt.org/](http://www.robotstxt.org/). 
 
-When this module is enabled, you'll be able to control the contents returned when a visitor requests `/robots.txt`. There is a "Robots" field within the SEO settings available in the admin dashboard. By default, when enabled, the `/robots.txt` will instruct robots to not crawl the site.
+When this feature is enabled, you'll be able to control the contents returned when a visitor requests `/robots.txt`. There is a "Robots" field within the SEO settings available in the admin dashboard. By default, when enabled, the `/robots.txt` will instruct robots to not crawl the site.
+
+### Favicon
+
+Customise the media used in the response for requests to `/favicon.ico`.
+
+When this feature is enabled, via the SEO settings available in the admin dashboard, you'll be able to configure the URL to a media asset that'll be returned when a request is made to `/favicon.ico`. The media asset can be selected from the Orchard media library or a custom URL can be entered. If this module is enabled and the Favicon field is empty, a 404 response will be returned.
+
+### Google Analytics
+
+Enter your [Google Analytics](https://www.google.com/analytics) or [Google Tag Manager](https://www.google.com/analytics/tag-manager/), which will be rendered on every page in the site. 
+
+When this feature is enabled, via the SEO settings available in the admin dashboard, you'll be able to enter your Google Analytics tracking code or Google Tag Manager ID. Depending on if these have been configured, everytime a page is served on the Orchard site the relevant JavaScript snippets will be loaded into the `<head>` section of the site.
