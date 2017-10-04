@@ -11,75 +11,85 @@
     Style.Require("jQueryColorBox");
 }
 
+
+<h1>@T("SEO Settings")</h1>
+
+<h2>@T("Redirect Settings")</h2>
+
 <fieldset>
-    <legend>@T("SEO Settings")</legend>
-
-    <hr />
-    <h2>SSL Settings</h2>
-    <div>
-        @Html.EditorFor(m => m.RedirectToNonWWW)
-        <label for="@Html.FieldIdFor(m => m.RedirectToNonWWW)" class="forcheckbox">@T("Redirect to non WWW")</label>
-        @Html.ValidationMessage("RedirectToNonWWW", "*")
-        <span class="hint">@T("Visitors making a request to the site using \"www\" will be redirected with a 301 response to the same URL without www.")</span>
-    </div>
-
-    <div>
-        @Html.EditorFor(m => m.ForceSSL)
-        <label for="@Html.FieldIdFor(m => m.ForceSSL)" class="forcheckbox">@T("Force SSL")</label>
-        @Html.ValidationMessage("ForceSSL", "*")
-        <span class="hint">@T("Force visitors to use SSL (https). This is a basic implementation that will change the URL from http to https, for greater control use the <a href=\"/Admin/Modules/Features\">Secure Sockets Layer</a> module.")</span>
-    </div>
-    
-    <hr />
-    <h2>Meta Tags</h2>
-
-    <div>
-        <label for="@Html.FieldIdFor(m => m.TwitterUsername)">@T("Twitter Username")</label>
-        @Html.EditorFor(m => m.TwitterUsername)
-        <span class="hint">@T("This will be used for the Twitter social sharing meta tags (twitter:site, twitter:creator).")</span>
-    </div>
-
-    <div>
-        <label for="@Html.FieldIdFor(m => m.DefaultDescription)">@T("DefaultDescription")</label>
-        @Html.TextAreaFor(m => m.DefaultDescription)
-        <span class="hint">@T("This is the default description in meta tags, this also can be overridden from within each page.")</span>
-    </div>
-    <div>
-        <label for="@Html.FieldIdFor(m => m.DefaultKeywords)">@T("DefaultKeywords")</label>
-        @Html.TextBoxFor(m => m.DefaultKeywords, new { @class = "text large" })
-        <span class="hint">@T("This is the default keywords in meta tags, this also can be overridden from within each page.")</span>
-    </div>
-
-    @if (isRobotsEnabled) {
-        <hr />
-        <h2>Site Crawlers</h2>
-        <div>
-            <label for="@Html.FieldIdFor(m => m.Robots)">@T("Robots.txt")</label>
-            @Html.TextAreaFor(m => m.Robots)
-            <span class="hint">@T("Define a robots.txt above, allowing web crawlers to know how to index your site. Find <a href=\"http://www.robotstxt.org/\">more information</a> on robots.txt.")</span>
-        </div>
-    }
-
-    @if (isFaviconEnabled) {
-        <hr />
-        <h2>Favicon</h2>
-        <div class="js-favicon">
-            <a href="#" class="js-open-media-library">Choose from media library</a>
-            @Html.TextBoxFor(m => m.Favicon, new { @class = "text large js-favicon-url-input" })
-            <span class="hint">@T("Define a favicon for this website.")</span>
-        </div>
-    }
-
-    <hr />
-    <h2>Analytics and Tag Manager</h2>
-    <div>
-        <label for="@Html.FieldIdFor(m => m.GoogleAnalytics)">@T("Google Analytics")</label>
-        @Html.TextBoxFor(m => m.GoogleAnalytics)
-        <span class="hint">@T("Enter the Google Analytics ID here to track analytics. e.g. UA-XXXXX-X")</span>
-    </div>
-    <div>
-        <label for="@Html.FieldIdFor(m => m.GoogleTagManager)">@T("Google Tag Manager")</label>
-        @Html.TextBoxFor(m => m.GoogleTagManager)
-        <span class="hint">@T("Enter the Google Tag Manager ID here to manage the tags via <a href=\"https://www.google.com/analytics/tag-manager/\">Google Tag Manager</a>. e.g. GMT-XXXXXXX")</span>
-    </div>
+    @Html.EditorFor(m => m.RedirectToNonWWW)
+    <label for="@Html.FieldIdFor(m => m.RedirectToNonWWW)" class="forcheckbox">@T("Redirect to non WWW")</label>
+    @Html.ValidationMessage("RedirectToNonWWW", "*")
+    <span class="hint">@T("Visitors making a request to the site using \"www\" will be redirected with a 301 response to the same URL without www.")</span>
 </fieldset>
+
+<fieldset>
+    @Html.EditorFor(m => m.ForceSSL)
+    <label for="@Html.FieldIdFor(m => m.ForceSSL)" class="forcheckbox">@T("Force SSL")</label>
+    @Html.ValidationMessage("ForceSSL", "*")
+    <span class="hint">@T("Force visitors to use SSL (https). This is a basic implementation that will change the URL from http to https, for greater control use the <a href=\"/Admin/Modules/Features\">Secure Sockets Layer</a> module.")</span>
+</fieldset>
+    
+<hr />
+
+<h2>@T("Meta Tags")</h2>
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.DefaultDescription)">@T("Default Description")</label>
+    @Html.TextAreaFor(m => m.DefaultDescription)
+    <span class="hint">@T("Default description meta tag, used when content item doesn't specify it's own. Summarise the content of the page in under 160 characters.")</span>
+</fieldset>
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.DefaultKeywords)">@T("Default Keywords")</label>
+    @Html.TextBoxFor(m => m.DefaultKeywords, new { @class = "text large" })
+    <span class="hint">@T("Default keywords meta tag, used when content item doesn't specify it's own. Comma separated list of words that describe the content on the page.")</span>
+</fieldset>
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.TwitterUsername)">@T("Twitter Username")</label>
+    @Html.EditorFor(m => m.TwitterUsername)
+    <span class="hint">@T("This will be used for the Twitter social sharing meta tags (twitter:site, twitter:creator).")</span>
+</fieldset>
+
+<hr />
+
+@if (isRobotsEnabled) {
+    <h2>@T("Site Crawlers")</h2>
+
+    <fieldset>
+        <label for="@Html.FieldIdFor(m => m.Robots)">@T("Robots.txt")</label>
+        @Html.TextAreaFor(m => m.Robots)
+        <span class="hint">@T("Define a robots.txt above, allowing web crawlers to know how to index your site. Find <a href=\"http://www.robotstxt.org/\">more information</a> on robots.txt.")</span>
+    </fieldset>
+
+    <hr />
+}
+
+@if (isFaviconEnabled) {
+    <h2>@T("Favicon")</h2>
+
+    <fieldset class="js-favicon">
+        <p style="margin-bottom: .4em"><a href="#" class="js-open-media-library">@T("Choose from media library")</a></p>
+        @Html.TextBoxFor(m => m.Favicon, new { @class = "text large js-favicon-url-input", placeholder = T("Enter URL to favicon image") })
+        <span class="hint">@T("Define a favicon for this website.")</span>
+    </fieldset>
+
+    <hr />
+}
+
+<h2>@T("Analytics and Tag Manager")</h2>
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.GoogleAnalytics)">@T("Google Analytics")</label>
+    @Html.TextBoxFor(m => m.GoogleAnalytics)
+    <span class="hint">@T("Enter the Google Analytics ID here to track analytics. e.g. UA-XXXXX-X")</span>
+</fieldset>
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.GoogleTagManager)">@T("Google Tag Manager")</label>
+    @Html.TextBoxFor(m => m.GoogleTagManager)
+    <span class="hint">@T("Enter the Google Tag Manager ID here to manage the tags via <a href=\"https://www.google.com/analytics/tag-manager/\">Google Tag Manager</a>. e.g. GMT-XXXXXXX")</span>
+</fieldset>
+
+<hr />
