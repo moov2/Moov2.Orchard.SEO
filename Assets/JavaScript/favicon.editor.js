@@ -1,10 +1,9 @@
 ﻿(function () {
     /**
-    * Opens media library picker.
-    */
+     * Opens media library picker.
+     */
     var openMediaPicker = function (e) {
         e.preventDefault();
-
 
         var adminIndex = location.href.toLowerCase().indexOf("/admin/"),
             url;
@@ -34,28 +33,22 @@
                     return;
                 }
 
-                mediaSelected(selectedData);
-
+                setMedia(selectedData);
             }
         });
     };
 
-    var mediaSelected = function (selectedData) {
-        var $faviconInput = document.querySelector('.js-favicon > .js-favicon-url-input');
-        var url = selectedData[0].title;
-        
-        $faviconInput.value = url;
+    var setMedia = function (selectedData) {
+        document.querySelector('.js-favicon .js-favicon-url-input').value = selectedData[0].resource;
     };
 
     /**
-    * Initialises media library picker.
-    */
+     * Initialises favicon editor
+     */
     var init = function () {
-        var $mediaLibrary = document.querySelector('.js-favicon > .js-open-media-library');
+        var $mediaLibrary = document.querySelector('.js-favicon .js-open-media-library');
         $mediaLibrary.addEventListener('click', openMediaPicker);
     };
 
-
     init();
-
 })();
