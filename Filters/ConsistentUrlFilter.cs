@@ -38,6 +38,7 @@ namespace Moov2.Orchard.SEO.Filters
             var consistentRequest = new Uri(request.Url.ToString());
 
             consistentRequest = ValidateWWW(settings, consistentRequest);
+            consistentRequest = ValidateNonWWW(settings, consistentRequest);
             consistentRequest = ValidateSSL(settings, consistentRequest);
 
             if (!consistentRequest.ToString().Equals(request.Url.ToString())) {
@@ -61,12 +62,22 @@ namespace Moov2.Orchard.SEO.Filters
 
         private Uri ValidateWWW(SEOSettingsPart settings, Uri url)
         {
-            if (!settings.RedirectToNonWWW)
+            if (settings.Redirect != "RedirectToNonWWW")
                 return url;
 
             if (url.Authority.StartsWith("www."))
                 return new Uri(url.ToString().Replace("www.", ""));
             
+            return url;
+        }
+
+        private Uri ValidateNonWWW(SEOSettingsPart settings, Uri url) {
+            if (settings.Redirect != "RedirectToWWW")
+                return url;
+
+            if (!url.Authority.StartsWith("www."))
+                return new Uri(url.ToString().Replace("http://", "http://www."));
+
             return url;
         }
 

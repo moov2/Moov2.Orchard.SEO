@@ -1,12 +1,23 @@
 ﻿using Orchard.ContentManagement;
 using Orchard.ContentManagement.FieldStorage.InfosetStorage;
 using System;
+using System.Collections.Generic;
 
-namespace Moov2.Orchard.SEO.Models
-{
-    public class SEOSettingsPart : ContentPart
-    {
+namespace Moov2.Orchard.SEO.Models {
+    public class SEOSettingsPart : ContentPart {
         public const string CacheKey = "SEOSettingsPart";
+
+
+        public Dictionary<string, string> Options {
+            get {
+                var options = new Dictionary<string, string>();
+                options.Add("NoRedirect", "No Redirect");
+                options.Add("RedirectToNonWWW", "Redirect to none WWW");
+                options.Add("RedirectToWWW", "Redirect to WWW");
+
+                return options;
+            }
+        }
 
         public bool ForceSSL {
             get {
@@ -14,6 +25,21 @@ namespace Moov2.Orchard.SEO.Models
                 return !string.IsNullOrWhiteSpace(attributeValue) && Convert.ToBoolean(attributeValue);
             }
             set { this.As<InfosetPart>().Set<SEOSettingsPart>("ForceSSL", value.ToString()); }
+        }
+
+        public string Redirect {
+            get {
+                var redirect = this.As<InfosetPart>().Get<SEOSettingsPart>("Redirect");
+
+                if (!string.IsNullOrEmpty(redirect))
+                    return redirect;
+
+                if (RedirectToNonWWW)
+                    return "RedirectToNonWWW";
+
+                return redirect;
+            }
+            set { this.As<InfosetPart>().Set<SEOSettingsPart>("Redirect", value.ToString()); }
         }
 
         public bool RedirectToNonWWW {
@@ -25,7 +51,7 @@ namespace Moov2.Orchard.SEO.Models
         }
 
         public string Robots {
-            get { return  this.As<InfosetPart>().Get<SEOSettingsPart>("Robots"); }
+            get { return this.As<InfosetPart>().Get<SEOSettingsPart>("Robots"); }
             set { this.As<InfosetPart>().Set<SEOSettingsPart>("Robots", (value == null ? "" : value.ToString())); }
         }
 

@@ -10,6 +10,8 @@
 
     Script.Require("FaviconEditor");
     Style.Require("jQueryColorBox");
+
+    var options = Model.Options.Select(x => new SelectListItem { Text = x.Value, Value = x.Key, Selected = x.Key == Model.Redirect });
 }
 
 
@@ -18,10 +20,10 @@
 <h2>@T("Redirect Settings")</h2>
 
 <fieldset>
-    @Html.EditorFor(m => m.RedirectToNonWWW)
-    <label for="@Html.FieldIdFor(m => m.RedirectToNonWWW)" class="forcheckbox">@T("Redirect to non WWW")</label>
-    @Html.ValidationMessage("RedirectToNonWWW", "*")
-    <span class="hint">@T("Visitors making a request to the site using \"www\" will be redirected with a 301 response to the same URL without www.")</span>
+    @Html.DropDownListFor(m => m.Redirect, options)
+    @Html.ValidationMessage("Redirect", "*")
+    <span class="hint">@T("Redirect to none WWW: Visitors making a request to the site using \"www\" will be redirected with a 301 response to the same URL without www.")</span>
+    <span class="hint">@T("Redirect to WWW: Visitors making a request to the site not using \"www\" will be redirected with a 301 response to the same URL with www.")</span>
 </fieldset>
 
 <fieldset>
