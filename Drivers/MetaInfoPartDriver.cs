@@ -57,7 +57,7 @@ namespace Moov2.Orchard.SEO.Drivers
 
             var seoSettings = _seoSettingsProvider.GetSettings();
 
-            var twitterUsername = (seoSettings.TwitterUsername.StartsWith("@") ? seoSettings.TwitterUsername : string.Format("@{0}", seoSettings.TwitterUsername));
+            var twitterUsername = string.IsNullOrEmpty(seoSettings.TwitterUsername) ? string.Empty : (seoSettings.TwitterUsername.StartsWith("@") ? seoSettings.TwitterUsername : string.Format("@{0}", seoSettings.TwitterUsername));
 
             return Combined(
                 ContentShape("Parts_MetaInfo", () => 
