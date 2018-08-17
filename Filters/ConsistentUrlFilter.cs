@@ -74,9 +74,9 @@ namespace Moov2.Orchard.SEO.Filters
         private Uri ValidateNonWWW(SEOSettingsPart settings, Uri url) {
             if (settings.Redirect != "RedirectToWWW")
                 return url;
-
+            
             if (!url.Authority.StartsWith("www."))
-                return new Uri(url.ToString().Replace("http://", "http://www."));
+                return new Uri(url.ToString().Replace(string.Format("{0}://", url.Scheme), string.Format("{0}://www.", url.Scheme)));
 
             return url;
         }
