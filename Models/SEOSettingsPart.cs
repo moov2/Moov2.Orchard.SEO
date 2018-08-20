@@ -50,6 +50,12 @@ namespace Moov2.Orchard.SEO.Models {
             set { this.As<InfosetPart>().Set<SEOSettingsPart>("RedirectToNonWWW", value.ToString()); }
         }
 
+        public string IgnoredUrls
+        {
+            get { return this.As<InfosetPart>().Get<SEOSettingsPart>("IgnoredUrls"); }
+            set { this.As<InfosetPart>().Set<SEOSettingsPart>("IgnoredUrls", value.ToString()); }
+        }
+
         public string Robots {
             get { return this.As<InfosetPart>().Get<SEOSettingsPart>("Robots"); }
             set { this.As<InfosetPart>().Set<SEOSettingsPart>("Robots", (value == null ? "" : value.ToString())); }

@@ -5,6 +5,7 @@ using Orchard.Localization;
 using Orchard.Mvc.Filters;
 using System;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Moov2.Orchard.SEO.Filters
@@ -32,9 +33,12 @@ namespace Moov2.Orchard.SEO.Filters
 
             if (filterContext.IsChildAction)
                 return;
-
-
+            
             var request = filterContext.HttpContext.Request;
+
+            if (CheckIfIgnored(settings, request.Url.ToString()))
+                return;
+
             var consistentRequest = new Uri(request.Url.ToString());
 
             consistentRequest = ValidateWWW(settings, consistentRequest);
@@ -48,6 +52,16 @@ namespace Moov2.Orchard.SEO.Filters
         }
 
         #region Helpers
+
+        private bool CheckIfIgnored(SEOSettingsPart settings, string url)
+        {
+            if (string.IsNullOrWhiteSpace(settings.IgnoredUrls))
+                return false;
+
+            var ignoredUrls = settings.IgnoredUrls.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            return settings.IgnoredUrls.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).Any(x => url.StartsWith(x));
+        }
 
         private Uri ValidateSSL(SEOSettingsPart settings, Uri url)
         {

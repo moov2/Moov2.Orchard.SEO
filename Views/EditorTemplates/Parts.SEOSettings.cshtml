@@ -32,7 +32,14 @@
     @Html.ValidationMessage("ForceSSL", "*")
     <span class="hint">@T("Force visitors to use SSL (https). This is a basic implementation that will change the URL from http to https, for greater control use the <a href=\"/Admin/Modules/Features\">Secure Sockets Layer</a> module.")</span>
 </fieldset>
-    
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.IgnoredUrls)">@T("Ignored URLs")</label>
+    @Html.TextAreaFor(m => m.IgnoredUrls)
+    @Html.ValidationMessage("IgnoredUrls", "*")
+    <span class="hint">@T("URLs that should be ignored by the redirect settings (ideal for handling staging slots within Azure). Use a new line to seperate each URL.")</span>
+</fieldset>    
+
 <hr />
 
 <h2>@T("Meta Tags")</h2>
