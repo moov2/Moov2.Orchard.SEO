@@ -53,7 +53,7 @@ namespace Moov2.Orchard.SEO.Models {
         public string IgnoredUrls
         {
             get { return this.As<InfosetPart>().Get<SEOSettingsPart>("IgnoredUrls"); }
-            set { this.As<InfosetPart>().Set<SEOSettingsPart>("IgnoredUrls", value.ToString()); }
+            set { this.As<InfosetPart>().Set<SEOSettingsPart>("IgnoredUrls", value == null ? "" : value.ToString()); }
         }
 
         public string Robots {
