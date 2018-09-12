@@ -7,6 +7,7 @@ using Orchard.ContentManagement.Handlers;
 using Orchard.Localization;
 using Orchard.Mvc.Html;
 using System.Web;
+using System.Web.Mvc;
 
 namespace Moov2.Orchard.SEO.Drivers
 {
@@ -50,8 +51,8 @@ namespace Moov2.Orchard.SEO.Drivers
             var pageTitle = string.IsNullOrEmpty(part.Title) ? WorkContext.CurrentSite.SiteName : part.Title;
             var pageTitleWithSiteName = string.IsNullOrEmpty(part.Title) ? WorkContext.CurrentSite.SiteName : string.Format("{0}{1}{2}", WorkContext.CurrentSite.SiteName, WorkContext.CurrentSite.PageTitleSeparator, part.Title);
 
-            var pageUrlHelper = new System.Web.Mvc.UrlHelper(HttpContext.Current.Request.RequestContext);
-            var pageUrl = string.Format("{0}{1}", WorkContext.CurrentSite.BaseUrl, pageUrlHelper.ItemDisplayUrl((ContentItem)part.ContentItem));
+            var pageUrlHelper = new UrlHelper(HttpContext.Current.Request.RequestContext);
+            string pageUrl = $"{WorkContext.CurrentSite.BaseUrl}{pageUrlHelper.ItemDisplayUrl(part.ContentItem)}";
 
             var currentCulture = WorkContext.CurrentCulture.Replace("-", "_");
 
@@ -64,7 +65,9 @@ namespace Moov2.Orchard.SEO.Drivers
                 shapeHelper.Parts_MetaInfo(
                     Description: (string.IsNullOrWhiteSpace(part.Description) ? seoSettings.DefaultDescription : part.Description), 
                     Keywords: (string.IsNullOrWhiteSpace(part.Keywords) ? seoSettings.DefaultKeywords: part.Keywords), 
-                    Title: pageTitle, 
+                    Title: pageTitle,
+                    TwitterImage: (!string.IsNullOrWhiteSpace(part.TwitterImage) ? part.TwitterImage : ""),
+                    OGImage: (!string.IsNullOrWhiteSpace(part.OGImage) ? part.OGImage : ""),
                     PageTitleWithSiteName: pageTitleWithSiteName, 
                     HasPageTitle: (string.IsNullOrEmpty(part.Title) ? false : true),
                     TwitterUsername: twitterUsername,
@@ -106,6 +109,8 @@ namespace Moov2.Orchard.SEO.Drivers
             context.ImportAttribute(part.PartDefinition.Name, "Description", description => part.Description = description);
             context.ImportAttribute(part.PartDefinition.Name, "Keywords", keywords => part.Keywords = keywords);
             context.ImportAttribute(part.PartDefinition.Name, "Title", title => part.Title = title);
+            context.ImportAttribute(part.PartDefinition.Name, "TwitterImage", twitterImage => part.TwitterImage = twitterImage);
+            context.ImportAttribute(part.PartDefinition.Name, "OGImage", ogImage => part.OGImage = ogImage);
         }
 
         #endregion
@@ -117,6 +122,8 @@ namespace Moov2.Orchard.SEO.Drivers
             context.Element(part.PartDefinition.Name).SetAttributeValue("Description", part.Description);
             context.Element(part.PartDefinition.Name).SetAttributeValue("Keywords", part.Keywords);
             context.Element(part.PartDefinition.Name).SetAttributeValue("Title", part.Title);
+            context.Element(part.PartDefinition.Name).SetAttributeValue("TwitterImage", part.TwitterImage);
+            context.Element(part.PartDefinition.Name).SetAttributeValue("OGImage", part.OGImage);
         }
 
         #endregion

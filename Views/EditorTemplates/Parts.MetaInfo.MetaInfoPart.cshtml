@@ -22,3 +22,16 @@
     <span class="hint">@T("Comma separated list of words that describe the content on the page.")</span>
 </fieldset>
 
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.Keywords)">@T("TwitterImage")</label>
+    @Html.TextBoxFor(m => m.TwitterImage, new { @class = "text large" })
+    <span class="hint">@T("Image used for twitter. A full URL to a unique image representing the content of the page. You should not use a generic image such as your website logo, author photo, or other image that spans multiple pages. Images for this Card support an aspect ratio of 1:1 with minimum dimensions of 144x144 or maximum of 4096x4096 pixels. Images must be less than 5MB in size. The image will be cropped to a square on all platforms. JPG, PNG, WEBP and GIF formats are supported. Only the first frame of an animated GIF will be used.")</span>
+</fieldset>
+
+
+<fieldset>
+    <label for="@Html.FieldIdFor(m => m.Keywords)">@T("OGImage")</label>
+    @Html.TextBoxFor(m => m.OGImage, new { @class = "text large" })
+    <span class="hint">@T("Open Graph Image, used for embedded previews. Must be a full URL to an image, not a relative URL.")</span>
+</fieldset>
+

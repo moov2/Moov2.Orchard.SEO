@@ -29,5 +29,16 @@ namespace Moov2.Orchard.SEO
 
             return 2;
         }
+
+        public int UpdateFrom2()
+        {
+            SchemaBuilder.AlterTable("MetaInfoPartRecord",
+                table => table.AddColumn<string>("TwitterImage", column => column.WithLength(500).WithDefault("")));
+
+            SchemaBuilder.AlterTable("MetaInfoPartRecord",
+                table => table.AddColumn<string>("OGImage", column => column.WithLength(500).WithDefault("")));
+
+            return 3;
+        }
     }
 }

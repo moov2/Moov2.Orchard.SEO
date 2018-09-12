@@ -57,7 +57,7 @@
         <meta name="twitter:description" content="@Model.Description" />
         <meta name="twitter:title" content="@Model.PageTitleWithSiteName" />
         <meta name="twitter:site" content="@Model.TwitterUsername" />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:image" content="@(!string.IsNullOrWhiteSpace(Model.TwitterImage) ? Model.TwitterImage : "")" />
         <meta name="twitter:creator" content="@Model.TwitterUsername" />
     }
 
@@ -69,7 +69,7 @@
         <meta property="og:description" content="@Model.Description" />
         <meta property="og:url" content="@Model.PageUrl" />
         <meta property="og:site_name" content="@WorkContext.CurrentSite.SiteName" />
-        <meta property="og:image" content="" />
+        <meta property="og:image" content="@(!string.IsNullOrWhiteSpace(Model.OGImage) ? Model.OGImage : "")" />
     }
 }
 
