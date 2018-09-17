@@ -4,5 +4,17 @@
       "Assets/JavaScript/favicon.editor.js"
     ],
     "output": "Scripts/favicon.editor.js"
+  },
+  {
+    "inputs": [
+      "Assets/JavaScript/ogimage.editor.js"
+    ],
+    "output": "Scripts/ogimage.editor.js"
+  },
+  {
+    "inputs": [
+      "Assets/JavaScript/twitterimage.editor.js"
+    ],
+    "output": "Scripts/twitterimage.editor.js"
   }
 ]
