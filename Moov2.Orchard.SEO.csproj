@@ -102,6 +102,10 @@
     <Content Include="Assets\JavaScript\favicon.editor.js" />
     <Content Include="Scripts\favicon.editor.js" />
     <Content Include="Scripts\favicon.editor.min.js" />
+    <Content Include="Scripts\ogimage.editor.js" />
+    <Content Include="Scripts\ogimage.editor.min.js" />
+    <Content Include="Scripts\twitterimage.editor.js" />
+    <Content Include="Scripts\twitterimage.editor.min.js" />
     <Content Include="Web.config" />
     <Content Include="Module.txt" />
   </ItemGroup>
