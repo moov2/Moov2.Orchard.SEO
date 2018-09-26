@@ -30,7 +30,8 @@
     <label for="@Html.FieldIdFor(m => m.RedirectToSiteUrl)">@T("Redirect to Site URL")</label>
     @Html.EditorFor(m => m.RedirectToSiteUrl)
     @Html.ValidationMessage("RedirectToSiteUrl", "*")
-    <span class="hint">@("Visitors to the site will be redirected to the specified URL above if they are not currently using that URL.")</span>
+    <span class="hint">@("WARNING: you could lose access to your site if you set this value incorrectly, consider adding an Ignored URL for your admin area.")</span>
+    <span class="hint">@("Visitors to the site will be redirected to the specified URL above with a 301 response if they are not currently using that URL. Their location within the site will not be affected.")</span>
     <span class="hint">@("Only supports changing the domain name and cannot clash with the WWW/none WWW setting above.")</span>
 </fieldset>
 
