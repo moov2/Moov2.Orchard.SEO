@@ -49,8 +49,9 @@ namespace Moov2.Orchard.SEO.Drivers
         {
             if (updater.TryUpdateModel(part, Prefix, null, null))
             {
-                ValidateSiteUrl(part);
+                ValidateSiteUrl(part, updater);
                 ValidateSiteUrlAndWWWCompatibility(part, updater);
+                ValidateSiteUrlAndForceSSLCompatibility(part, updater);
 
                 _signals.Trigger(SEOSettingsPart.CacheKey);
             }
@@ -67,7 +68,7 @@ namespace Moov2.Orchard.SEO.Drivers
         #endregion
 
         #region Helpers
-        private void ValidateSiteUrl(SEOSettingsPart part)
+        private void ValidateSiteUrl(SEOSettingsPart part, IUpdateModel updater)
         {
             if (string.IsNullOrWhiteSpace(part.RedirectToSiteUrl))
                 return;
@@ -79,6 +80,14 @@ namespace Moov2.Orchard.SEO.Drivers
                 url = (part.ForceSSL ? "https://" : "http://") + url.TrimStart('/');
 
             part.RedirectToSiteUrl = url;
+
+            try
+            {
+                new Uri(part.RedirectToSiteUrl);
+            }catch(Exception)
+            {
+                updater.AddModelError("RedirectToSiteUrl", T("Couldn't parse 'Redirect to Site URL' please ensure it is in the correct format"));
+            }
         }
 
         private void ValidateSiteUrlAndWWWCompatibility(SEOSettingsPart part, IUpdateModel updater)
@@ -96,6 +105,15 @@ namespace Moov2.Orchard.SEO.Drivers
             {
                 updater.AddModelError("RedirectToSiteUrl", T("Incompatible settings of 'Redirect' and 'Redirect to Site URL' because URL does not contain 'www' which would be redirected away"));
             }
+        }
+
+        private void ValidateSiteUrlAndForceSSLCompatibility(SEOSettingsPart part, IUpdateModel updater)
+        {
+            if (!part.ForceSSL || string.IsNullOrWhiteSpace(part.RedirectToSiteUrl))
+                return;
+
+            if (!part.RedirectToSiteUrl.StartsWith("https://"))
+                updater.AddModelError("RedirectToSiteUrl", T("Incompatible settings of 'ForceSSL' and 'Redirect to Site URL' because URL does not contain https:// which would cause a double redirect"));
         }
         #endregion
     }
