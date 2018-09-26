@@ -2,10 +2,10 @@
 using Moov2.Orchard.SEO.Services;
 using Orchard;
 using Orchard.Localization;
+using Orchard.Logging;
 using Orchard.Mvc.Filters;
 using System;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Moov2.Orchard.SEO.Filters
@@ -14,6 +14,8 @@ namespace Moov2.Orchard.SEO.Filters
     {
         private readonly IOrchardServices _orchardServices;
         private readonly ISEOSettingsProvider _seoSettingsProvider;
+
+        public ILogger Logger { get; set; } = new NullLogger();
 
         public ConsistentUrlFilter(IOrchardServices orchardServices, ISEOSettingsProvider seoSettingsProvider)
         {
@@ -44,6 +46,7 @@ namespace Moov2.Orchard.SEO.Filters
             consistentRequest = ValidateWWW(settings, consistentRequest);
             consistentRequest = ValidateNonWWW(settings, consistentRequest);
             consistentRequest = ValidateSSL(settings, consistentRequest);
+            consistentRequest = ValidateSiteUrl(settings, consistentRequest);
 
             if (!consistentRequest.ToString().Equals(request.Url.ToString())) {
                 filterContext.Result = new RedirectResult(consistentRequest.ToString());
@@ -61,6 +64,31 @@ namespace Moov2.Orchard.SEO.Filters
             var ignoredUrls = settings.IgnoredUrls.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
             return settings.IgnoredUrls.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries).Any(x => url.StartsWith(x));
+        }
+
+        private Uri ValidateSiteUrl(SEOSettingsPart settings, Uri uri)
+        {
+            if (string.IsNullOrWhiteSpace(settings.RedirectToSiteUrl))
+                return uri;
+
+            Uri requestedUri;
+
+            try
+            {
+                requestedUri = new Uri(settings.RedirectToSiteUrl);
+            }
+            catch (Exception e)
+            {
+                Logger.Error(e, "Error parsing RedirectToSiteURL, skipping redirect");
+                return uri;
+            }
+
+            if (requestedUri.Host == null || requestedUri.Host.Equals(uri.Host, StringComparison.OrdinalIgnoreCase))
+                return uri;
+
+            var builder = new UriBuilder(uri);
+            builder.Host = requestedUri.Host;
+            return builder.Uri;
         }
 
         private Uri ValidateSSL(SEOSettingsPart settings, Uri url)
