@@ -27,6 +27,15 @@
 </fieldset>
 
 <fieldset>
+    <label for="@Html.FieldIdFor(m => m.RedirectToSiteUrl)">@T("Redirect to Site URL")</label>
+    @Html.EditorFor(m => m.RedirectToSiteUrl)
+    @Html.ValidationMessage("RedirectToSiteUrl", "*")
+    <span class="hint">@("WARNING: you could lose access to your site if you set this value incorrectly, consider adding an Ignored URL for your admin area.")</span>
+    <span class="hint">@("Visitors to the site will be redirected to the specified URL above with a 301 response if they are not currently using that URL. Their location within the site will not be affected.")</span>
+    <span class="hint">@("Only supports changing the domain name and cannot clash with the WWW/none WWW setting above.")</span>
+</fieldset>
+
+<fieldset>
     @Html.EditorFor(m => m.ForceSSL)
     <label for="@Html.FieldIdFor(m => m.ForceSSL)" class="forcheckbox">@T("Force SSL")</label>
     @Html.ValidationMessage("ForceSSL", "*")
@@ -38,7 +47,7 @@
     @Html.TextAreaFor(m => m.IgnoredUrls)
     @Html.ValidationMessage("IgnoredUrls", "*")
     <span class="hint">@T("URLs that should be ignored by the redirect settings (ideal for handling staging slots within Azure). Use a new line to seperate each URL.")</span>
-</fieldset>    
+</fieldset>
 
 <hr />
 
@@ -64,7 +73,8 @@
 
 <hr />
 
-@if (isRobotsEnabled) {
+@if (isRobotsEnabled)
+{
     <h2>@T("Site Crawlers")</h2>
 
     <fieldset>
@@ -76,7 +86,8 @@
     <hr />
 }
 
-@if (isFaviconEnabled) {
+@if (isFaviconEnabled)
+{
     <h2>@T("Favicon")</h2>
 
     <fieldset class="js-favicon">

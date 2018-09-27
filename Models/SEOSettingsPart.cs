@@ -3,7 +3,8 @@ using Orchard.ContentManagement.FieldStorage.InfosetStorage;
 using System;
 using System.Collections.Generic;
 
-namespace Moov2.Orchard.SEO.Models {
+namespace Moov2.Orchard.SEO.Models
+{
     public class SEOSettingsPart : ContentPart {
         public const string CacheKey = "SEOSettingsPart";
 
@@ -48,6 +49,12 @@ namespace Moov2.Orchard.SEO.Models {
                 return !string.IsNullOrWhiteSpace(attributeValue) && Convert.ToBoolean(attributeValue);
             }
             set { this.As<InfosetPart>().Set<SEOSettingsPart>("RedirectToNonWWW", value.ToString()); }
+        }
+
+        public string RedirectToSiteUrl
+        {
+            get { return this.As<InfosetPart>().Get<SEOSettingsPart>("RedirectToSiteUrl"); }
+            set { this.As<InfosetPart>().Set<SEOSettingsPart>("RedirectToSiteUrl", value == null ? "" : value.ToString()); }
         }
 
         public string IgnoredUrls

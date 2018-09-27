@@ -5,26 +5,39 @@ using Orchard.ContentManagement;
 using Orchard.ContentManagement.Drivers;
 using Orchard.ContentManagement.Handlers;
 using Orchard.Localization;
+using System;
 
 namespace Moov2.Orchard.SEO.Drivers
 {
     public class SEOSettingsPartDriver : ContentPartDriver<SEOSettingsPart>
     {
+        #region Dependencies
         private readonly ISignals _signals;
-        private const string TemplateName = "Parts.SEOSettings";
+        #endregion
 
+        #region Constants
+        private const string TemplateName = "Parts.SEOSettings";
+        #endregion
+
+        #region Constructor
         public SEOSettingsPartDriver(ISignals signals)
         {
             _signals = signals;
             T = NullLocalizer.Instance;
         }
+        #endregion
 
+        #region Orchard Properties
         public Localizer T { get; set; }
+        #endregion
 
-        protected override string Prefix {
+        #region Overrides
+        protected override string Prefix
+        {
             get { return "SEOSettings"; }
         }
 
+        #region Editor
         protected override DriverResult Editor(SEOSettingsPart part, dynamic shapeHelper)
         {
             return ContentShape("Parts_SEOSettings_Edit",
@@ -35,14 +48,73 @@ namespace Moov2.Orchard.SEO.Drivers
         protected override DriverResult Editor(SEOSettingsPart part, IUpdateModel updater, dynamic shapeHelper)
         {
             if (updater.TryUpdateModel(part, Prefix, null, null))
+            {
+                ValidateSiteUrl(part, updater);
+                ValidateSiteUrlAndWWWCompatibility(part, updater);
+                ValidateSiteUrlAndForceSSLCompatibility(part, updater);
+
                 _signals.Trigger(SEOSettingsPart.CacheKey);
+            }
 
             return Editor(part, shapeHelper);
         }
-
+        #endregion
+        #region Importing
         protected override void Importing(SEOSettingsPart part, ImportContentContext context)
         {
             _signals.Trigger(SEOSettingsPart.CacheKey);
         }
+        #endregion
+        #endregion
+
+        #region Helpers
+        private void ValidateSiteUrl(SEOSettingsPart part, IUpdateModel updater)
+        {
+            if (string.IsNullOrWhiteSpace(part.RedirectToSiteUrl))
+                return;
+
+            var url = part.RedirectToSiteUrl;
+
+            // We need to ensure that this will parse as a URI so prepend a URL scheme
+            if (!url.StartsWith("http://", StringComparison.OrdinalIgnoreCase) && !url.StartsWith("https://", StringComparison.OrdinalIgnoreCase))
+                url = (part.ForceSSL ? "https://" : "http://") + url.TrimStart('/');
+
+            part.RedirectToSiteUrl = url;
+
+            try
+            {
+                new Uri(part.RedirectToSiteUrl);
+            }catch(Exception)
+            {
+                updater.AddModelError("RedirectToSiteUrl", T("Couldn't parse 'Redirect to Site URL' please ensure it is in the correct format"));
+            }
+        }
+
+        private void ValidateSiteUrlAndWWWCompatibility(SEOSettingsPart part, IUpdateModel updater)
+        {
+            if (string.IsNullOrWhiteSpace(part.RedirectToSiteUrl))
+                return;
+
+            if ("RedirectToNonWWW".Equals(part.Redirect, StringComparison.OrdinalIgnoreCase) && part.RedirectToSiteUrl.Contains("www."))
+            {
+                updater.AddModelError("RedirectToSiteUrl", T("Incompatible settings of 'Redirect' and 'Redirect to Site URL' because URL contains 'www' which would be redirected away"));
+                return;
+            }
+
+            if ("RedirectToWWW".Equals(part.Redirect, StringComparison.OrdinalIgnoreCase) && !part.RedirectToSiteUrl.Contains("www."))
+            {
+                updater.AddModelError("RedirectToSiteUrl", T("Incompatible settings of 'Redirect' and 'Redirect to Site URL' because URL does not contain 'www' which would be redirected away"));
+            }
+        }
+
+        private void ValidateSiteUrlAndForceSSLCompatibility(SEOSettingsPart part, IUpdateModel updater)
+        {
+            if (!part.ForceSSL || string.IsNullOrWhiteSpace(part.RedirectToSiteUrl))
+                return;
+
+            if (!part.RedirectToSiteUrl.StartsWith("https://"))
+                updater.AddModelError("RedirectToSiteUrl", T("Incompatible settings of 'ForceSSL' and 'Redirect to Site URL' because URL does not contain https:// which would cause a double redirect"));
+        }
+        #endregion
     }
 }
