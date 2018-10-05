@@ -47,7 +47,10 @@
      */
     var init = function () {
         var $mediaLibrary = document.querySelector('.js-favicon .js-open-media-library');
-        $mediaLibrary.addEventListener('click', openMediaPicker);
+
+        if ($mediaLibrary && $mediaLibrary.length > 0) {
+            $mediaLibrary.addEventListener('click', openMediaPicker);
+        }
     };
 
     init();
