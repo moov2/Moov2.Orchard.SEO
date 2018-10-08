@@ -9,6 +9,7 @@
     var isGoogleAnalyticsEnabled = WorkContext.Resolve<ShellDescriptor>().Features.Any(x => x.Name == "Moov2.Orchard.SEO.GoogleAnalytics");
 
     Script.Require("FaviconEditor");
+    Script.Require("SettingsEditor");
     Style.Require("jQueryColorBox");
 
     var options = Model.Options.Select(x => new SelectListItem { Text = x.Value, Value = x.Key, Selected = x.Key == Model.Redirect });
@@ -20,19 +21,17 @@
 <h2>@T("Redirect Settings")</h2>
 
 <fieldset>
-    @Html.DropDownListFor(m => m.Redirect, options)
+    @Html.DropDownListFor(m => m.Redirect, options, new { @class = "js-redirect-type-select" })
     @Html.ValidationMessage("Redirect", "*")
     <span class="hint">@T("Redirect to none WWW: Visitors making a request to the site using \"www\" will be redirected with a 301 response to the same URL without www.")</span>
     <span class="hint">@T("Redirect to WWW: Visitors making a request to the site not using \"www\" will be redirected with a 301 response to the same URL with www.")</span>
+    <span class="hint">@T("Redirect to Domain: Visitors making a request to the site not using the configured domain will be redirected with a 301 response to the domain.")</span>
 </fieldset>
 
-<fieldset>
-    <label for="@Html.FieldIdFor(m => m.RedirectToSiteUrl)">@T("Redirect to Site URL")</label>
-    @Html.EditorFor(m => m.RedirectToSiteUrl)
+<fieldset class="js-redirect-domain-field" style="display: none;">
+    <label for="@Html.FieldIdFor(m => m.RedirectToSiteUrl)">@T("Redirect to Domain")</label>
+    @Html.TextBoxFor(m => m.RedirectToSiteUrl, new { @class = "text large", placeholder = "E.g. https://example.com" })
     @Html.ValidationMessage("RedirectToSiteUrl", "*")
-    <span class="hint">@("WARNING: you could lose access to your site if you set this value incorrectly, consider adding an Ignored URL for your admin area.")</span>
-    <span class="hint">@("Visitors to the site will be redirected to the specified URL above with a 301 response if they are not currently using that URL. Their location within the site will not be affected.")</span>
-    <span class="hint">@("Only supports changing the domain name and cannot clash with the WWW/none WWW setting above.")</span>
 </fieldset>
 
 <fieldset>

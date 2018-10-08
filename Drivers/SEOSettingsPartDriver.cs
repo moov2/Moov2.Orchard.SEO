@@ -1,5 +1,6 @@
 ﻿
 using Moov2.Orchard.SEO.Models;
+using Moov2.Orchard.SEO.Options;
 using Orchard.Caching;
 using Orchard.ContentManagement;
 using Orchard.ContentManagement.Drivers;
@@ -59,12 +60,14 @@ namespace Moov2.Orchard.SEO.Drivers
             return Editor(part, shapeHelper);
         }
         #endregion
+
         #region Importing
         protected override void Importing(SEOSettingsPart part, ImportContentContext context)
         {
             _signals.Trigger(SEOSettingsPart.CacheKey);
         }
         #endregion
+
         #endregion
 
         #region Helpers
@@ -92,18 +95,10 @@ namespace Moov2.Orchard.SEO.Drivers
 
         private void ValidateSiteUrlAndWWWCompatibility(SEOSettingsPart part, IUpdateModel updater)
         {
-            if (string.IsNullOrWhiteSpace(part.RedirectToSiteUrl))
-                return;
-
-            if ("RedirectToNonWWW".Equals(part.Redirect, StringComparison.OrdinalIgnoreCase) && part.RedirectToSiteUrl.Contains("www."))
+            if (RedirectOptions.Domain.Equals(part.Redirect, StringComparison.OrdinalIgnoreCase) && string.IsNullOrWhiteSpace(part.RedirectToSiteUrl))
             {
-                updater.AddModelError("RedirectToSiteUrl", T("Incompatible settings of 'Redirect' and 'Redirect to Site URL' because URL contains 'www' which would be redirected away"));
+                updater.AddModelError("RedirectToSiteUrl", T("Redirect to Domain is required when redirecting to domain"));
                 return;
-            }
-
-            if ("RedirectToWWW".Equals(part.Redirect, StringComparison.OrdinalIgnoreCase) && !part.RedirectToSiteUrl.Contains("www."))
-            {
-                updater.AddModelError("RedirectToSiteUrl", T("Incompatible settings of 'Redirect' and 'Redirect to Site URL' because URL does not contain 'www' which would be redirected away"));
             }
         }
 
@@ -115,6 +110,7 @@ namespace Moov2.Orchard.SEO.Drivers
             if (!part.RedirectToSiteUrl.StartsWith("https://"))
                 updater.AddModelError("RedirectToSiteUrl", T("Incompatible settings of 'ForceSSL' and 'Redirect to Site URL' because URL does not contain https:// which would cause a double redirect"));
         }
+
         #endregion
     }
 }

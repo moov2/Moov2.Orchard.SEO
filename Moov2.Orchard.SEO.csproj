@@ -88,6 +88,7 @@
     <Compile Include="Models\RedirectPart.cs" />
     <Compile Include="Models\RedirectPartRecord.cs" />
     <Compile Include="Models\SEOSettingsPart.cs" />
+    <Compile Include="Options\RedirectOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RedirectMigrations.cs" />
     <Compile Include="ResourceManifest.cs" />
@@ -98,12 +99,15 @@
   <ItemGroup>
     <Content Include="Assets.json" />
     <Content Include="Assets\JavaScript\ogimage.editor.js" />
+    <Content Include="Assets\JavaScript\settings.editor.js" />
     <Content Include="Assets\JavaScript\twitterimage.editor.js" />
     <Content Include="Assets\JavaScript\favicon.editor.js" />
     <Content Include="Scripts\favicon.editor.js" />
     <Content Include="Scripts\favicon.editor.min.js" />
     <Content Include="Scripts\ogimage.editor.js" />
     <Content Include="Scripts\ogimage.editor.min.js" />
+    <Content Include="Scripts\settings.editor.js" />
+    <Content Include="Scripts\settings.editor.min.js" />
     <Content Include="Scripts\twitterimage.editor.js" />
     <Content Include="Scripts\twitterimage.editor.min.js" />
     <Content Include="Web.config" />

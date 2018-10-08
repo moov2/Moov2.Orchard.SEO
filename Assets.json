@@ -16,5 +16,11 @@
       "Assets/JavaScript/twitterimage.editor.js"
     ],
     "output": "Scripts/twitterimage.editor.js"
+  },
+  {
+    "inputs": [
+      "Assets/JavaScript/settings.editor.js"
+    ],
+    "output": "Scripts/settings.editor.js"
   }
 ]

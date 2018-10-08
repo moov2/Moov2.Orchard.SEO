@@ -1,4 +1,5 @@
-﻿using Orchard.ContentManagement;
+﻿using Moov2.Orchard.SEO.Options;
+using Orchard.ContentManagement;
 using Orchard.ContentManagement.FieldStorage.InfosetStorage;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,10 @@ namespace Moov2.Orchard.SEO.Models
         public Dictionary<string, string> Options {
             get {
                 var options = new Dictionary<string, string>();
-                options.Add("NoRedirect", "No Redirect");
-                options.Add("RedirectToNonWWW", "Redirect to none WWW");
-                options.Add("RedirectToWWW", "Redirect to WWW");
+                options.Add(RedirectOptions.None, "No Redirect");
+                options.Add(RedirectOptions.NonWWW, "Redirect to none WWW");
+                options.Add(RedirectOptions.WWW, "Redirect to WWW");
+                options.Add(RedirectOptions.Domain, "Redirect to Domain");
 
                 return options;
             }
@@ -36,7 +38,7 @@ namespace Moov2.Orchard.SEO.Models
                     return redirect;
 
                 if (RedirectToNonWWW)
-                    return "RedirectToNonWWW";
+                    return RedirectOptions.NonWWW;
 
                 return redirect;
             }

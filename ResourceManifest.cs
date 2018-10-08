@@ -6,6 +6,7 @@ namespace Moov2.Orchard.Featured {
             var manifest = builder.Add();
             manifest.DefineScript("FaviconEditor").SetUrl("favicon.editor.min.js", "favicon.editor.js").SetDependencies(new string [] { "JQuery", "jQueryColorBox" });
             manifest.DefineScript("OGImageEditor").SetUrl("ogimage.editor.min.js", "ogimage.editor.js").SetDependencies(new string[] { "JQuery", "jQueryColorBox" });
+            manifest.DefineScript("SettingsEditor").SetUrl("settings.editor.min.js", "settings.editor.js").SetDependencies(new string[] { "JQuery" });
             manifest.DefineScript("TwitterImageEditor").SetUrl("twitterimage.editor.min.js", "twitterimage.editor.js").SetDependencies(new string[] { "JQuery", "jQueryColorBox" });
         }
     }

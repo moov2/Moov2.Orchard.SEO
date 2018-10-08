@@ -1,4 +1,5 @@
 ﻿using Moov2.Orchard.SEO.Models;
+using Moov2.Orchard.SEO.Options;
 using Moov2.Orchard.SEO.Services;
 using Orchard;
 using Orchard.Localization;
@@ -68,7 +69,7 @@ namespace Moov2.Orchard.SEO.Filters
 
         private Uri ValidateSiteUrl(SEOSettingsPart settings, Uri uri)
         {
-            if (string.IsNullOrWhiteSpace(settings.RedirectToSiteUrl))
+            if (settings.Redirect != RedirectOptions.Domain || string.IsNullOrWhiteSpace(settings.RedirectToSiteUrl))
                 return uri;
 
             Uri requestedUri;
@@ -104,7 +105,7 @@ namespace Moov2.Orchard.SEO.Filters
 
         private Uri ValidateWWW(SEOSettingsPart settings, Uri url)
         {
-            if (settings.Redirect != "RedirectToNonWWW")
+            if (settings.Redirect != RedirectOptions.NonWWW)
                 return url;
 
             if (url.Authority.StartsWith("www."))
@@ -114,7 +115,7 @@ namespace Moov2.Orchard.SEO.Filters
         }
 
         private Uri ValidateNonWWW(SEOSettingsPart settings, Uri url) {
-            if (settings.Redirect != "RedirectToWWW")
+            if (settings.Redirect != RedirectOptions.WWW)
                 return url;
             
             if (!url.Authority.StartsWith("www."))
